@@ -1,4 +1,0 @@
-C:\Program Files (x86)\PuTTY\putty.exe,putty.exe
-C:\projetos\unicaffe\build\UniCafeClient.exe,UniCafeClient.exe
-C:\Program Files (x86)\PuTTY\putty.exe,putty.exe
-C:\projetos\unicaffe\build\UniCafeClient.exe,UniCafeClient.exe

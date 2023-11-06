@@ -1,8 +1,0 @@
-
-,cmd.exe
-,SearchProtocolHost.exe
-C:\Program Files (x86)\PuTTY\putty.exe,putty.exe
-C:\projetos\unicaffe\src\UniCaffe\unicaffe\UniCafeClient.exe,UniCafeClient.exe
-,software_reporter_tool.exe
-,software_reporter_tool.exe
-C:\Windows\SysWOW64\Macromed\Flash\FlashUtil32_29_0_0_113_Plugin.exe,FlashUtil32_29_0_0_113_Plugin.exe
