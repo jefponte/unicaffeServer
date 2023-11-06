@@ -1,16 +1,1 @@
-*.class
-*.classpath
-*.lock
-*.project
-*.prefs
-*.jar
-*.properties
-*.lst
-*.rar
-*.settings
-*.buildpath
-*.metadata
-*.recommenders
-*.zip
-*.exe
-log_logado.txt
+/target/
