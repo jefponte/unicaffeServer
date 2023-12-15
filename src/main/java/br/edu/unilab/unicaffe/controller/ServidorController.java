@@ -881,6 +881,7 @@ public class ServidorController {
 		Iterator<Cliente> it = listaDeClientes.iterator();
 		while (it.hasNext()) {
 			Cliente daVez = it.next();
+			cacaFantasmas(daVez);
 			new PrintStream(daVez.getSaida()).println(comando+"()");
 		}
 	}
@@ -920,6 +921,7 @@ public class ServidorController {
 		Iterator<Cliente> it = listaDeClientes.iterator();
 		while (it.hasNext()) {
 			Cliente daVez = it.next();
+			cacaFantasmas(daVez);
 			if (daVez.getMaquina().getNome().toLowerCase().equals(nomeDaMaquina.toLowerCase())) {
 				encontrei = true;
 				PrintStream ps;
@@ -982,6 +984,7 @@ public class ServidorController {
 	 * @return
 	 */
 	public void cacaFantasmas(final Cliente cliente) {
+		System.out.println("CHamou caca fantasmas");
 		Thread cacando = new Thread(new Runnable() {
 			@Override
 			public void run() {
