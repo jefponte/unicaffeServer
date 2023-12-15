@@ -921,8 +921,9 @@ public class ServidorController {
 		Iterator<Cliente> it = listaDeClientes.iterator();
 		while (it.hasNext()) {
 			Cliente daVez = it.next();
-			cacaFantasmas(daVez);
+
 			if (daVez.getMaquina().getNome().toLowerCase().equals(nomeDaMaquina.toLowerCase())) {
+				cacaFantasmas(daVez);
 				encontrei = true;
 				PrintStream ps;
 				try {
