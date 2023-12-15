@@ -30,7 +30,7 @@ import br.edu.unilab.unicaffe.model.Maquina;
 import br.edu.unilab.unicaffe.model.Usuario;
 
 /**
- * 
+ *
  * @author Jefferson
  *
  *         Nesta classe funciona o núcleo do Servidor. Processa as conexões com
@@ -54,7 +54,7 @@ public class ServidorController {
 	private String bloqueados;
 
 	/**
-	 * 
+	 *
 	 * @return lista de programas bloqueados
 	 */
 	public String getBloqueados() {
@@ -62,7 +62,7 @@ public class ServidorController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param bloqueados
 	 */
 	public void setBloqueados(String bloqueados) {
@@ -78,7 +78,7 @@ public class ServidorController {
 
 	/**
 	 * Retorna uma lista com todos os clientes conectados.
-	 * 
+	 *
 	 * @return
 	 */
 	public Collection<Cliente> getListaDeClientes() {
@@ -108,7 +108,7 @@ public class ServidorController {
 	/**
 	 * verificar os clientes que interagiram a menos de 30 minutos enviar toVivo
 	 * enviar caça fantasma
-	 * 
+	 *
 	 * @param cliente
 	 * @param tempoEsperaMinutos
 	 * @param tempoDesligaPorInatividadeMinutos
@@ -164,7 +164,7 @@ public class ServidorController {
 		recebendoConexao.start();
 
 	}
-	
+
 	private void corrigirClientesDuplicados(Cliente cliente) {
 		System.out.println("entrando na tread do limpar Inativos");
 		try {
@@ -201,12 +201,12 @@ public class ServidorController {
 					+ cliente.getMaquina().getLaboratorio().getNome());
 		}
 	}
-	
+
 
 	/**
 	 * Inicia uma Thread, que vai aguardar uma mensagem do cliente e responde. A
 	 * mensagem poderá conter parâmetros e para isso deverá conter parênteses.
-	 * 
+	 *
 	 * @param conexao
 	 */
 	public void processaConexao(final Socket conexao) {
@@ -259,8 +259,8 @@ public class ServidorController {
 									conexao.close();
 									break;
 								}
-								
-								
+
+
 								processaMensagem(cliente, mensagem);
 							}
 							System.out.println("Cliente removido " + mensagem);
@@ -381,7 +381,7 @@ public class ServidorController {
 
 	/**
 	 * Retorna uma mensagem de ajuda.
-	 * 
+	 *
 	 * @return mensagem de ajudar.
 	 */
 	public String getAjuda() {
@@ -394,7 +394,7 @@ public class ServidorController {
 	/**
 	 * Verifica se o usuário está ou não logado. Caso esteja logado em alguma
 	 * máquina vai bloquear o acesso dele na mesma.
-	 * 
+	 *
 	 * @param usuario
 	 * @return se está logado ou não.
 	 */
@@ -419,7 +419,7 @@ public class ServidorController {
 	/**
 	 * Processa uma mensagem vinda do UniCaffé Web. Esta está preparada para
 	 * responder uma mensagem de administrador e enviar uma resposta.
-	 * 
+	 *
 	 * @param cliente
 	 * @param mensagem
 	 */
@@ -451,7 +451,7 @@ public class ServidorController {
 			psAdm.println("Vamos rebotar");
 			fecharConexao(cliente);
 			processaProcesso("reboot");
-			
+
 			return;
 		} else if (mensagem.equals("stop")) {
 			psAdm.println("Parando aplicação");
@@ -491,7 +491,7 @@ public class ServidorController {
 
 			psAdm.println("Perfil definido com sucesso!");
 			fecharConexao(cliente);
-			
+
 			Iterator<Cliente> it = listaDeClientes.iterator();
 			while (it.hasNext()) {
 				Cliente daVez = it.next();
@@ -499,7 +499,7 @@ public class ServidorController {
 					daVez.getMaquina().getLaboratorio().setPerfil(laboratorio.getPerfil());
 				}
 			}
-			
+
 			try {
 				perfilDao.getConexao().close();
 			} catch (SQLException e) {
@@ -690,7 +690,7 @@ public class ServidorController {
 		} else if (comando.equals("desativar")) {
 			psAdm.println("Desativando o " + parametros);
 			fecharConexao(cliente);
-			
+
 			Iterator<Cliente> it = listaDeClientes.iterator();
 			while (it.hasNext()) {
 				Cliente daVez = it.next();
@@ -727,8 +727,8 @@ public class ServidorController {
 		} else if (comando.equals("mensagemLaboatorio")) {
 			String nomeLaboratorio = parametros.substring(0, parametros.indexOf(','));
 			String texto = parametros.substring(parametros.indexOf(',') + 1);
-			
-			
+
+
 			for (Cliente daVez : listaDeClientes) {
 				if (daVez.getMaquina().getLaboratorio().getNome().toLowerCase().trim()
 						.equals(nomeLaboratorio.toLowerCase().trim())) {
@@ -824,7 +824,7 @@ public class ServidorController {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return String com os dados no formato Json
 	 */
 	public String getJson() {
@@ -888,9 +888,9 @@ public class ServidorController {
 	/**
 	 * verifica se a String bloqueados já recebeu ou não a lista de aplicativos
 	 * bloqueados
-	 * 
+	 *
 	 * @return boolean
-	 * 
+	 *
 	 */
 	public boolean processosBloqueadosJaDisponiveis() {
 		for (int i = 0; i < 50; i++) {
@@ -910,7 +910,7 @@ public class ServidorController {
 
 	/**
 	 * Envia um comando para um cliente/máquina
-	 * 
+	 *
 	 * @param nomeDaMaquina
 	 * @param parametro
 	 * @param comando
@@ -936,7 +936,7 @@ public class ServidorController {
 
 	/**
 	 * fecha conexão
-	 * 
+	 *
 	 * @param cliente
 	 * @return se fechou ou não
 	 */
@@ -977,7 +977,7 @@ public class ServidorController {
 	/**
 	 * Gostbusters. Elimina um cliente da lista de clientes, caso ela não esteja
 	 * conectada ao servidor.
-	 * 
+	 *
 	 * @param c
 	 * @return
 	 */
@@ -1008,13 +1008,13 @@ public class ServidorController {
 		});
 		cacando.start();
 	}
-	
+
 	/**
 	 * Gostbusters. Elimina um cliente da lista de clientes, caso ela não esteja
 	 * conectada ao servidor.
 	 * @param cliente
 	 */
-	public void cacaFantasmasSemThread(Cliente cliente) {	
+	public void cacaFantasmasSemThread(Cliente cliente) {
 				new PrintStream(cliente.getSaida()).println("toVivoSim()");
 
 				try {
@@ -1040,7 +1040,7 @@ public class ServidorController {
 	/**
 	 * Elimina todos os clientes que não tiveram interação com o servidor nos
 	 * ultimos segundos.
-	 * 
+	 *
 	 * @param tempo
 	 */
 
@@ -1065,7 +1065,7 @@ public class ServidorController {
 
 	/**
 	 * Faz o tratamento da mensagem de um cliente e envia uma resposta.
-	 * 
+	 *
 	 * @param cliente
 	 * @param mensagem
 	 */
