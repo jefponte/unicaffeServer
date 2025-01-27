@@ -368,11 +368,7 @@ public class ServidorController {
 					}
 				}
 
-				long tempoConexao = new Date().getTime() - cliente.getUltimaInteracao();
 
-				System.out.println(
-						"processamento do " + cliente.getMaquina().getNome() + "  durou " + tempoConexao / 60000
-								+ " minutos " + " msg " + mensagem + "conectado?" + cliente.getConexao().isConnected());
 			}
 		});
 
@@ -985,7 +981,6 @@ public class ServidorController {
 	 * @return
 	 */
 	public void cacaFantasmas(final Cliente cliente) {
-		System.out.println("CHamou caca fantasmas");
 		Thread cacando = new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -999,11 +994,9 @@ public class ServidorController {
 				long teste = new Date().getTime() - 20000;
 				if (cliente.getUltimaInteracao() < teste) {
 					listaDeClientes.remove(cliente);
-					System.out.println("removendo fantasma " + cliente.getMaquina().getNome());
 					try {
 						cliente.getConexao().close();
 					} catch (IOException e) {
-						System.out.println("Ja estava desconectado");
 						e.printStackTrace();
 					}
 
@@ -1029,11 +1022,9 @@ public class ServidorController {
 				long teste = new Date().getTime() - 20000;
 				if (cliente.getUltimaInteracao() < teste) {
 					listaDeClientes.remove(cliente);
-					System.out.println("removendo fantasma " + cliente.getMaquina().getNome());
 					try {
 						cliente.getConexao().close();
 					} catch (IOException e) {
-						System.out.println("Ja estava desconectado");
 						e.printStackTrace();
 					}
 
@@ -1058,7 +1049,6 @@ public class ServidorController {
 				try {
 					daVez.getConexao().close();
 				} catch (IOException e) {
-					System.out.println("Ja estava desconectado");
 					e.printStackTrace();
 				}
 
@@ -1090,16 +1080,16 @@ public class ServidorController {
 			Usuario usuario = new Usuario();
 			usuario.setLogin(login.toLowerCase());
 			usuario.setSenha(senha);
-//			if (login.trim().equals("usuario")) {
-//				try {
-//					PrintStream ps;
-//					ps = new PrintStream(cliente.getSaida(), true, "UTF-8");
-//					ps.println("printc(Usuario Inválido!)");
-//				} catch (UnsupportedEncodingException e) {
-//					e.printStackTrace();
-//				}
-//				return;
-//			}
+			if (login.trim().equals("usuario")) {
+				try {
+					PrintStream ps;
+					ps = new PrintStream(cliente.getSaida(), true, "UTF-8");
+					ps.println("printc(Usuario Inválido!)");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				return;
+			}
 
 			int idLaboratorio = cliente.getMaquina().getLaboratorio().getId();
 			int numeroDeVisitantes = 0;
